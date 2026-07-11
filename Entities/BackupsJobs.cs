@@ -6,7 +6,7 @@ namespace SGC_Database_Backup.Entities
 {
     public class BackupsJobs:ComponenteBase
     {
-        public DatabaseConnections DbConnection { get; set; }
+        public DatabaseOptions DbConnection { get; set; }
 
         public int? DbConnectionId { get; set; }
 

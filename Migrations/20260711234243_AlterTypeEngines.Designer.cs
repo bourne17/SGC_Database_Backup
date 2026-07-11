@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SGC_Database_Backup.Data;
 
@@ -10,9 +11,11 @@ using SGC_Database_Backup.Data;
 namespace SGC_Database_Backup.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260711234243_AlterTypeEngines")]
+    partial class AlterTypeEngines
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "10.0.9");
@@ -588,7 +591,7 @@ namespace SGC_Database_Backup.Migrations
                         {
                             Id = 1,
                             CreatedAt = new DateTime(2026, 7, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DefaultPort = 3306,
+                            DefaultPort = 0,
                             Description = "MariaDb",
                             HasSqlOptions = false
                         },
@@ -596,7 +599,7 @@ namespace SGC_Database_Backup.Migrations
                         {
                             Id = 2,
                             CreatedAt = new DateTime(2026, 7, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DefaultPort = 3306,
+                            DefaultPort = 0,
                             Description = "MySQL",
                             HasSqlOptions = false
                         },
@@ -604,7 +607,7 @@ namespace SGC_Database_Backup.Migrations
                         {
                             Id = 3,
                             CreatedAt = new DateTime(2026, 7, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DefaultPort = 1521,
+                            DefaultPort = 0,
                             Description = "Oracle",
                             HasSqlOptions = false
                         },
@@ -612,7 +615,7 @@ namespace SGC_Database_Backup.Migrations
                         {
                             Id = 4,
                             CreatedAt = new DateTime(2026, 7, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DefaultPort = 5432,
+                            DefaultPort = 0,
                             Description = "PostgreSQL",
                             HasSqlOptions = false
                         },
@@ -620,9 +623,9 @@ namespace SGC_Database_Backup.Migrations
                         {
                             Id = 5,
                             CreatedAt = new DateTime(2026, 7, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DefaultPort = 1433,
+                            DefaultPort = 0,
                             Description = "SQL Server",
-                            HasSqlOptions = true
+                            HasSqlOptions = false
                         },
                         new
                         {
@@ -636,7 +639,7 @@ namespace SGC_Database_Backup.Migrations
                         {
                             Id = 7,
                             CreatedAt = new DateTime(2026, 7, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DefaultPort = 3050,
+                            DefaultPort = 0,
                             Description = "Firebird",
                             HasSqlOptions = false
                         });
