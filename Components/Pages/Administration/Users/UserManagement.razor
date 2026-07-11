@@ -1,0 +1,31 @@
+﻿@page "/administration/users"
+@using SGC_Database_Backup.Components.Extensions
+<LoadingOverlay IsLoading="@isLoading"/>
+<ComponentHeader Title="Gestion de Usuarios" SubTitle="Gestiona la lista de usuarios" OnRefresh="LoadUsers" OnAdd="AddUser"/>
+<RadzenDataGrid Data="users">
+    <Columns>
+        <RadzenDataGridColumn Property="Id" Title="Codigo"  Width="160px" />
+        <RadzenDataGridColumn Property="Username" Title="Nombre"  Width="160px" />
+        <RadzenDataGridColumn Property="Email" Title="Correo"  Width="160px" />
+        <RadzenDataGridColumn Context="context" Title="Estatus"  Width="160px" >
+            <Template>
+                @if(context.IsActive)
+                {
+                    <RadzenChip Text="Activo" ChipStyle="BadgeStyle.Success" />
+                }
+                else
+
+                {
+                    <RadzenChip Text="Suspendido" ChipStyle="BadgeStyle.Danger" />
+
+                }
+            </Template>
+        </RadzenDataGridColumn>
+        <RadzenDataGridColumn Context="context" Title="Acciones" Width="160px">
+            <Template>
+                <RadzenButton Click="@(() => EditUser(context.Id))" Icon="edit" ButtonStyle="ButtonStyle.Warning" />
+            </Template>
+        </RadzenDataGridColumn>
+
+    </Columns>
+</RadzenDataGrid>

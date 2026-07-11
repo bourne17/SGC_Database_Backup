@@ -1,0 +1,12 @@
+﻿@inherits LayoutComponentBase
+<RadzenComponents @rendermode="InteractiveServer" />
+
+<div class="d-flex" style="height: 100vh;">
+    <NavMenu />
+    <div class="d-flex flex-column flex-grow-1 overflow-auto" style="background-color: #F9FAFB;">
+       
+        <main class="flex-grow-1 p-4">
+            @Body
+        </main>
+    </div>
+</div>

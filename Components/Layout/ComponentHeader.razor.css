@@ -1,0 +1,91 @@
+/* CSS for ComponentHeader component */
+.page-header {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    justify-content: space-between;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: space-between;
+    margin-bottom: 24px;
+}
+
+    .page-header .add-item.d-flex {
+        margin-right: auto;
+    }
+
+.d-flex {
+    display: flex !important;
+}
+
+.table-top-head {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    justify-content: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+}
+
+ul {
+    list-style: none;
+}
+
+ol, ul {
+    list-style: none;
+    margin-block-end: 0;
+    padding: 0;
+}
+
+dl, ol, ul {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+.table-top-head li {
+    margin-right: 8px;
+    flex-shrink: 0;
+}
+
+.page-header .page-btn {
+    margin-left: 8px;
+}
+
+    .page-header .page-btn.import {
+        margin-left: 8px;
+    }
+
+a {
+    cursor: pointer;
+    text-decoration: none;
+    -webkit-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+.table-top-head li a {
+    height: 35px;
+    width: 35px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    justify-content: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    border: 1px solid #E6EAED;
+    background: #ffffff;
+    border-radius: 5px;
+    padding: 4px;
+}
+
+.page-header h4 {
+    margin-bottom: 5px;
+}
