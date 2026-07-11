@@ -4,7 +4,7 @@ namespace SGC_Database_Backup.Entities.Base
 {
     public class ComponenteBase:EntityBase
     {
-        [MaxLength(100)]
+        [MaxLength(200)]
 
         public string Description { get; set; }
         public DateTime? CreatedAt { get; set; }
