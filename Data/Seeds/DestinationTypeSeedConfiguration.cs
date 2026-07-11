@@ -10,8 +10,8 @@ namespace SGC_Database_Backup.Data.Seeds
         {
             builder.ToTable("DestinationTypes")
                 .HasData(
-                    new DestinationType { Id = 1, Description = "Local" },
-                    new DestinationType { Id = 2, Description = "Ftp" }
+                    new DestinationType { Id = 1, Description = "Local", CreatedAt = new DateTime(2026, 7, 11, 0, 0, 0), },
+                    new DestinationType { Id = 2, Description = "Ftp", CreatedAt = new DateTime(2026, 7, 11, 0, 0, 0), }
                 );
         }
     }

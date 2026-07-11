@@ -3,16 +3,15 @@ using Radzen;
 using SGC_Database_Backup.Components;
 using SGC_Database_Backup.Data;
 using SGC_Database_Backup.Repositories;
-using SGC_Database_Backup.Services.UoW;
-using SGC_Database_Backup.Services.Users;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContextFactory<ApplicationDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();

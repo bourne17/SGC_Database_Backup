@@ -10,10 +10,10 @@ namespace SGC_Database_Backup.Data.Seeds
         {
             builder.ToTable("BackupJobStatus");
             builder.HasData(
-                new BackupJobStatus { Id = 1, Description = "Running" },
-                new BackupJobStatus { Id = 2, Description = "Success" },
-                new BackupJobStatus { Id = 3, Description = "Error" },
-                new BackupJobStatus { Id = 4, Description = "Partial" }
+                new BackupJobStatus { Id = 1, Description = "Running", CreatedAt = new DateTime(2026, 7, 11, 0, 0, 0), },
+                new BackupJobStatus { Id = 2, Description = "Success", CreatedAt = new DateTime(2026, 7, 11, 0, 0, 0), },
+                new BackupJobStatus { Id = 3, Description = "Error", CreatedAt = new DateTime(2026, 7, 11, 0, 0, 0), },
+                new BackupJobStatus { Id = 4, Description = "Partial", CreatedAt = new DateTime(2026, 7, 11, 0, 0, 0), }
             );
         }
     }

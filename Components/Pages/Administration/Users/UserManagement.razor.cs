@@ -2,14 +2,14 @@
 using Microsoft.AspNetCore.Components;
 using Radzen;
 using SGC_Database_Backup.Entities;
-using SGC_Database_Backup.Services.Users;
+using SGC_Database_Backup.Repositories;
 
 namespace SGC_Database_Backup.Components.Pages.Administration.Users
 {
     public partial class UserManagement
     {
         [Inject]
-        private IUserService UserService { get; set; }
+        private IUserRepository UserService { get; set; }
         [Inject]
         private DialogService DialogService { get; set; }
 

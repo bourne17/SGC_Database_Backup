@@ -10,8 +10,8 @@ namespace SGC_Database_Backup.Data.Seeds
         {
             builder.ToTable("BackupLogsTypes");
             builder.HasData(
-                new BackupLogsType { Id = 1, Description = "Backup" },
-                new BackupLogsType { Id = 2, Description = "Restore" }
+                new BackupLogsType { Id = 1, Description = "Backup", CreatedAt = new DateTime(2026, 7, 11, 0, 0, 0), },
+                new BackupLogsType { Id = 2, Description = "Restore", CreatedAt = new DateTime(2026, 7, 11, 0, 0, 0), }
 
             );
         }

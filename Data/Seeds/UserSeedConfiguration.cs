@@ -21,7 +21,8 @@ public class UserSeedConfiguration : IEntityTypeConfiguration<User>
         Username = "admin",
         Email = "admin@example.com",
         PasswordHash = "HASH_DE_LA_CONTRASEÑA_AQUÍ", // Reemplaza con un hash real si usas una librería de seguridad
-        IsActive = true
+        IsActive = true,
+        CreatedAt = new DateTime(2026, 7, 11, 0, 0, 0),
     },
     new User
     {
@@ -30,6 +31,7 @@ public class UserSeedConfiguration : IEntityTypeConfiguration<User>
         Email = "usuario1@example.com",
         PasswordHash = "HASH_DE_LA_CONTRASEÑA_AQUÍ",
         IsActive = true,
+        CreatedAt = new DateTime(2026, 7, 11, 0, 0, 0),
     });
     }
 }
