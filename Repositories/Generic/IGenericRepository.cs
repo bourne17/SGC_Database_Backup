@@ -1,7 +1,7 @@
 ﻿using System.Linq.Expressions;
 using SGC_Database_Backup.Entities;
 
-namespace SGC_Database_Backup.Repositories
+namespace SGC_Database_Backup.Repositories.Generic
 {
     public interface IGenericRepository<T> where T : class
     {

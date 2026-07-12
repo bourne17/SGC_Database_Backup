@@ -3,6 +3,8 @@ using Radzen;
 using SGC_Database_Backup.Components;
 using SGC_Database_Backup.Data;
 using SGC_Database_Backup.Repositories;
+using SGC_Database_Backup.Repositories.Connections;
+using SGC_Database_Backup.Repositories.Users;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +14,7 @@ builder.Services.AddDbContextFactory<ApplicationDbContext>(options =>
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IDatabaseOptionsRepository, DatabaseOptionsRepository>();
+builder.Services.AddScoped<ITypeEngineRepository, TypeEngineRepository>();
 
 // Add services to the container.
 builder.Services.AddRazorComponents()

@@ -5,10 +5,10 @@
 <RadzenDataGrid Data="databaseOptions">
     <Columns>
         <RadzenDataGridColumn Property="Description" Title="Nombre" Width="160px" />
-        <RadzenDataGridColumn Property="EngineDescription" Title="Engine" Width="160px" />
+        <RadzenDataGridColumn Property="TypeEngineDescription" Title="Engine" Width="160px" />
         <RadzenDataGridColumn Property="Host" Title="Servidor" Width="160px" />
         <RadzenDataGridColumn Property="Port" Title="Puerto" Width="160px" />
-        <RadzenDataGridColumn Property="User" Title="Usuario" Width="160px" />
+        <RadzenDataGridColumn Property="UserName" Title="Usuario" Width="160px" />
         <RadzenDataGridColumn Context="context" Title="Estatus" Width="160px">
             <Template>
                 @if (context.IsActive)
@@ -25,7 +25,9 @@
         </RadzenDataGridColumn>
         <RadzenDataGridColumn Context="context" Title="Acciones" Width="160px">
             <Template>
-                <RadzenButton Click="@(() => EditConnection(context.Id))" Icon="edit" ButtonStyle="ButtonStyle.Warning" />
+                <RadzenButton Icon="plug_connect" ButtonStyle="ButtonStyle.Success" Size="ButtonSize.Small" title="probar conexion"/>
+                <RadzenButton Click="@(() => EditConnection(context.Id))" Icon="edit" ButtonStyle="ButtonStyle.Warning" Size="ButtonSize.Small" title="Editar"/>
+                <RadzenButton Icon="delete_forever" ButtonStyle="ButtonStyle.Danger" Size="ButtonSize.Small" title="Eliminar conexion"/>
             </Template>
         </RadzenDataGridColumn>
 

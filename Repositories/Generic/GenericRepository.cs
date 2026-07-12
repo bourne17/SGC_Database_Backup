@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using SGC_Database_Backup.Data;
 
-namespace SGC_Database_Backup.Repositories
+namespace SGC_Database_Backup.Repositories.Generic
 {
     public class GenericRepository<T>(IDbContextFactory<ApplicationDbContext> context) : IGenericRepository<T> where T : class
     {
@@ -26,7 +26,7 @@ namespace SGC_Database_Backup.Repositories
             }
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync()
+        public virtual async Task<IEnumerable<T>> GetAllAsync()
         {
             var dbcontext = await context.CreateDbContextAsync();
             return await dbcontext.Set<T>().ToListAsync();

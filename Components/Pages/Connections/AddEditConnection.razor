@@ -1,5 +1,79 @@
-﻿<h3>AddEditConnection</h3>
-
-@code {
-
+﻿@using SGC_Database_Backup.Components.Extensions
+<LoadingOverlay IsLoading="@isLoading" />
+@if (connectionToEdit is not null)
+{
+    <EditForm Model="connectionToEdit" OnValidSubmit="Save">
+        <RadzenStack Orientation="Orientation.Vertical" Gap="0.5rem" class="mb-2">
+            <RadzenText Text="Nombre de la conexión" TextStyle="TextStyle.Body2" />
+            <RadzenTextBox @bind-Value="connectionToEdit.Description" Placeholder="Ej: Producción SQL Server" />
+        </RadzenStack>
+        <RadzenStack Orientation="Orientation.Vertical" Gap="0.5rem" class="mb-2">
+            <RadzenText Text="Motor de base de datos" TextStyle="TextStyle.Body2" />
+            <RadzenDropDown @bind-Value="connectionToEdit.TypeEngineId"
+                            Data="@typeEngines"
+                            TextProperty="Description"
+                            ValueProperty="Id"
+                            Placeholder="Seleccione un motor..."
+                            Change="OnEngineTypeChange" />
+        </RadzenStack>
+        <RadzenStack Orientation="Orientation.Horizontal" Gap="1rem" class="mb-2">
+            <RadzenStack Orientation="Orientation.Vertical" Gap="0.5rem" class="flex-grow-1">
+                <RadzenText Text="Host / Servidor" TextStyle="TextStyle.Body2" />
+                <RadzenTextBox @bind-Value="connectionToEdit.Host" Placeholder="localhost" />
+            </RadzenStack>
+            <RadzenStack Orientation="Orientation.Vertical" Gap="0.5rem" Style="width: 120px;">
+                <RadzenText Text="Puerto" TextStyle="TextStyle.Body2" />
+                <RadzenNumeric @bind-Value="connectionToEdit.Port" />
+            </RadzenStack>
+        </RadzenStack>
+        <RadzenStack Orientation="Orientation.Horizontal" Gap="1rem" class="mb-2">
+            <RadzenStack Orientation="Orientation.Vertical" Gap="0.5rem" class="flex-grow-1">
+                <RadzenText Text="Usuario" TextStyle="TextStyle.Body2" />
+                <RadzenTextBox @bind-Value="connectionToEdit.UserName" Placeholder="sa" />
+            </RadzenStack>
+            <RadzenStack Orientation="Orientation.Vertical" Gap="0.5rem" class="flex-grow-1">
+                <RadzenText Text="Contraseña" TextStyle="TextStyle.Body2" />
+                <RadzenTextBox @bind-Value="connectionToEdit.Password" type="password" />
+            </RadzenStack>
+        </RadzenStack>
+        <RadzenStack Orientation="Orientation.Horizontal" Gap="1rem" class="mb-2">
+            <RadzenStack Orientation="Orientation.Vertical" Gap="0.5rem" class="flex-grow-1">
+                <RadzenText Text="SID / Service" TextStyle="TextStyle.Body2" />
+                <RadzenTextBox @bind-Value="connectionToEdit.Sid_Service" />
+            </RadzenStack>
+            <RadzenStack Orientation="Orientation.Vertical" Gap="0.5rem" class="flex-grow-1">
+                <RadzenText Text="Base de datos por defecto" TextStyle="TextStyle.Body2" />
+                <RadzenTextBox @bind-Value="connectionToEdit.DefaultDB" />
+            </RadzenStack>
+        </RadzenStack>
+        <RadzenStack Orientation="Orientation.Horizontal" JustifyContent="JustifyContent.SpaceBetween">
+        <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" Gap="1.5rem" class="mb-2">
+            <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" Gap="0.5rem">
+                <RadzenText Text="Activo" TextStyle="TextStyle.Body2" />
+                <RadzenSwitch @bind-Value="connectionToEdit.IsActive" />
+            </RadzenStack>
+            <RadzenStack Orientation="Orientation.Horizontal" Visible="@hasSqlOptions">
+                <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" Gap="0.5rem">
+                    <RadzenText Text="Encriptar" TextStyle="TextStyle.Body2" />
+                    <RadzenSwitch @bind-Value="connectionToEdit.IsEncrypt" />
+                </RadzenStack>
+                <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" Gap="0.5rem">
+                    <RadzenText Text="Trust Certificate" TextStyle="TextStyle.Body2" />
+                    <RadzenSwitch @bind-Value="connectionToEdit.TrustServerCertificate" />
+                </RadzenStack>
+            </RadzenStack>
+        </RadzenStack>
+        </RadzenStack>
+        <RadzenStack Orientation="Orientation.Horizontal" JustifyContent="JustifyContent.End" Gap="1rem" class="mt-3">
+            <RadzenButton ButtonType="ButtonType.Button"
+                          Text="Cancelar"
+                          ButtonStyle="ButtonStyle.Light"
+                          Click="@Close" />
+            <RadzenButton ButtonType="ButtonType.Submit"
+                          Text="Guardar"
+                          ButtonStyle="ButtonStyle.Primary"
+                          Icon="save"
+                          IsBusy="@isSaving" />
+        </RadzenStack>
+    </EditForm>
 }
