@@ -9,12 +9,12 @@
         </RadzenStack>
         <RadzenStack Orientation="Orientation.Vertical" Gap="0.5rem" class="mb-2">
             <RadzenText Text="Motor de base de datos" TextStyle="TextStyle.Body2" />
-            <RadzenDropDown @bind-Value="connectionToEdit.TypeEngineId"
-                            Data="@typeEngines"
+            <RadzenDropDown Data="@typeEngines" 
+                Value="@connectionToEdit.TypeEngineId"
                             TextProperty="Description"
                             ValueProperty="Id"
                             Placeholder="Seleccione un motor..."
-                            Change="OnEngineTypeChange" />
+                            ValueChanged="@((int? value) => OnEngineTypeValueChange(value))" />
         </RadzenStack>
         <RadzenStack Orientation="Orientation.Horizontal" Gap="1rem" class="mb-2">
             <RadzenStack Orientation="Orientation.Vertical" Gap="0.5rem" class="flex-grow-1">
@@ -76,4 +76,7 @@
                           IsBusy="@isSaving" />
         </RadzenStack>
     </EditForm>
+}
+@code {
+   
 }

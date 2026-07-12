@@ -25,7 +25,7 @@
         </RadzenDataGridColumn>
         <RadzenDataGridColumn Context="context" Title="Acciones" Width="160px">
             <Template>
-                <RadzenButton Icon="plug_connect" ButtonStyle="ButtonStyle.Success" Size="ButtonSize.Small" title="probar conexion"/>
+                <RadzenButton Icon="plug_connect" Click="@(() => TestConnection(context))" ButtonStyle="ButtonStyle.Success" Size="ButtonSize.Small" title="probar conexion"/>
                 <RadzenButton Click="@(() => EditConnection(context.Id))" Icon="edit" ButtonStyle="ButtonStyle.Warning" Size="ButtonSize.Small" title="Editar"/>
                 <RadzenButton Icon="delete_forever" ButtonStyle="ButtonStyle.Danger" Size="ButtonSize.Small" title="Eliminar conexion"/>
             </Template>

@@ -44,6 +44,10 @@ namespace SGC_Database_Backup.Components.Pages.Connections
                 connectionToEdit = ConnectionId.HasValue
                     ? await DatabaseOptionService.FindAsync(ConnectionId.Value)
                     : new DatabaseOptions();
+                if (ConnectionId.HasValue)
+                {
+                    await ShowHideSqlOptions(connectionToEdit);
+                }
             }
             finally
             {
@@ -51,9 +55,21 @@ namespace SGC_Database_Backup.Components.Pages.Connections
             }
         }
 
+        private async Task ShowHideSqlOptions(DatabaseOptions? connectionToEdit)
+        {
+            var typeEngineSelected = await TypeEngineService.FindAsync(connectionToEdit.TypeEngineId.Value);
+            if (typeEngineSelected == null)
+            {
+                return;
+            }
+
+            connectionToEdit.Port = typeEngineSelected.DefaultPort;
+            hasSqlOptions = typeEngineSelected.HasSqlOptions;
+        }
+
         private async Task LoadTypeEngines()
         {
-            
+
             typeEngines = await TypeEngineService.GetAllAsync();
         }
 
@@ -68,7 +84,7 @@ namespace SGC_Database_Backup.Components.Pages.Connections
                     await DatabaseOptionService.CreateAsync(connectionToEdit);
                 Close();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 NotificationExtensions.NotifyError(NotificationService, "Error en operacion", $"Error: {ex.Message}");
             }
@@ -85,18 +101,13 @@ namespace SGC_Database_Backup.Components.Pages.Connections
             DialogService.Close();
         }
 
-        private async Task OnEngineTypeChange()
+        private async Task OnEngineTypeValueChange(int? typeEngineId)
         {
-            
-            int typeEngineId = connectionToEdit.TypeEngineId.HasValue?connectionToEdit.TypeEngineId.Value:-1;
-            var typeEngineSelected = await TypeEngineService.FindAsync(typeEngineId);
-            if(typeEngineSelected==null)
-            {
-                return;
-            }
+            connectionToEdit.TypeEngineId = typeEngineId;
+            await ShowHideSqlOptions(connectionToEdit);
 
-            connectionToEdit.Port = typeEngineSelected.DefaultPort;
-            hasSqlOptions = typeEngineSelected.HasSqlOptions;
+            StateHasChanged();
         }
+
     }
 }

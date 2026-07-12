@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Components;
 using Radzen;
+using SGC_Database_Backup.Components.Extensions;
 using SGC_Database_Backup.Entities;
 using SGC_Database_Backup.Repositories.Connections;
 
@@ -12,6 +13,9 @@ namespace SGC_Database_Backup.Components.Pages.Connections
 
         [Inject]
         private DialogService DialogService { get; set; }
+
+        [Inject]
+        private NotificationService NotificationService { get; set; }
 
         private IEnumerable<DatabaseOptions> databaseOptions { get; set; }
         private bool isLoading = false;
@@ -49,6 +53,28 @@ namespace SGC_Database_Backup.Components.Pages.Connections
             {
                 { "LoadConnections", EventCallback.Factory.Create(this, LoadConnections) }
             });
+        }
+
+        public async Task TestConnection(DatabaseOptions options)
+        {
+            try
+            {
+                isLoading = true;
+                var connection = await DatabaseOptionService.FindAsync(options.Id);
+                var result = await DatabaseOptionService.TestConnectionAsync(connection);
+                if (result.Success)
+                {
+                   NotificationExtensions.NotifySuccess(NotificationService,"Conexión exitosa", "La conexión a la base de datos fue exitosa.");
+                }
+                else
+                {
+                  NotificationExtensions.NotifyError(NotificationService, "Error de conexión", $"No se pudo conectar a la base de datos: {result.Message}");
+                }
+            }
+            finally
+            {
+                isLoading = false;
+            }
         }
     }
 }
