@@ -1,5 +1,33 @@
-﻿<h3>ConnectionManager</h3>
+﻿@page "/connections/list"
+@using SGC_Database_Backup.Components.Extensions
+<LoadingOverlay IsLoading="@isLoading"/>
+<ComponentHeader Title="Gestion de Usuarios" SubTitle="Gestiona la lista de usuarios" OnRefresh="LoadConnections" OnAdd="AddConnection"/>
+<RadzenDataGrid Data="databaseOptions">
+    <Columns>
+        <RadzenDataGridColumn Property="Description" Title="Nombre" Width="160px" />
+        <RadzenDataGridColumn Property="EngineDescription" Title="Engine" Width="160px" />
+        <RadzenDataGridColumn Property="Host" Title="Servidor" Width="160px" />
+        <RadzenDataGridColumn Property="Port" Title="Puerto" Width="160px" />
+        <RadzenDataGridColumn Property="User" Title="Usuario" Width="160px" />
+        <RadzenDataGridColumn Context="context" Title="Estatus" Width="160px">
+            <Template>
+                @if (context.IsActive)
+                {
+                    <RadzenChip Text="Activo" ChipStyle="BadgeStyle.Success" />
+                }
+                else
 
-@code {
+                {
+                    <RadzenChip Text="Suspendido" ChipStyle="BadgeStyle.Danger" />
 
-}
+                }
+            </Template>
+        </RadzenDataGridColumn>
+        <RadzenDataGridColumn Context="context" Title="Acciones" Width="160px">
+            <Template>
+                <RadzenButton Click="@(() => EditConnection(context.Id))" Icon="edit" ButtonStyle="ButtonStyle.Warning" />
+            </Template>
+        </RadzenDataGridColumn>
+
+    </Columns>
+</RadzenDataGrid>

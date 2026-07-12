@@ -11,6 +11,7 @@ builder.Services.AddDbContextFactory<ApplicationDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IDatabaseOptionsRepository, DatabaseOptionsRepository>();
 
 // Add services to the container.
 builder.Services.AddRazorComponents()

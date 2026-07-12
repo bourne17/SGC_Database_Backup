@@ -11,9 +11,29 @@ namespace SGC_Database_Backup.Components.Pages.Connections
         private IDatabaseOptionsRepository DatabaseOptionService { get; set; }
 
         private IEnumerable<DatabaseOptions> databaseOptions { get; set; }
+        private bool isLoading = false;
         protected override async Task OnInitializedAsync()
         {
-            databaseOptions = await DatabaseOptionService.GetAllAsync();
+            await LoadConnections();
+
         }
+
+        private async Task LoadConnections()
+        {
+            try
+            {
+                isLoading = true;
+                databaseOptions = await DatabaseOptionService.GetAllAsync();
+            }
+            finally
+            {
+                isLoading = false;
+
+            }
+        }
+
+        private void EditConnection(int connectionId) { }
+
+        private void AddConnection() { }
     }
 }
