@@ -1,5 +1,66 @@
-﻿<h3>AddEditDestination</h3>
+﻿@using SGC_Database_Backup.Components.Extensions
+<LoadingOverlay IsLoading="@isLoading" />
 
-@code {
-
-}
+<EditForm Model="destinationToEdit" OnValidSubmit="Save">
+    <RadzenStack Orientation="Orientation.Vertical" Gap="0.5rem" class="mb-2">
+        <RadzenText Text="Nombre del destino" TextStyle="TextStyle.Body2" />
+        <RadzenTextBox @bind-Value="destinationToEdit.Description" Placeholder="Ej: Backup Local" />
+    </RadzenStack>
+    <RadzenStack Orientation="Orientation.Vertical" Gap="0.5rem" class="mb-2">
+        <RadzenText Text="Tipo de destino" TextStyle="TextStyle.Body2" />
+        <RadzenDropDown @bind-Value="destinationToEdit.DestinationTypeId"
+                        Data="@destinationTypes"
+                        TextProperty="Description"
+                        ValueProperty="Id"
+                        Placeholder="Seleccione un tipo..."
+                        Change="@OnDestinationTypeChanged" />
+    </RadzenStack>
+    <RadzenStack Orientation="Orientation.Vertical" Gap="0.5rem" class="mb-2">
+        <RadzenText Text="Ruta" TextStyle="TextStyle.Body2" />
+        <RadzenStack Orientation="Orientation.Horizontal" Gap="0.5rem">
+            <RadzenTextBox @bind-Value="destinationToEdit.Path" Placeholder="Ej: /backups/" Style="flex-grow: 1;" />
+            <RadzenButton Text="Examinar" ButtonStyle="ButtonStyle.Info" Icon="folder_open" Click="@BrowseFolder" Disabled="@(!canBrowse)" />
+        </RadzenStack>
+    </RadzenStack>
+    <RadzenStack Orientation="Orientation.Horizontal" Gap="1rem" class="mb-2">
+        <RadzenStack Orientation="Orientation.Vertical" Gap="0.5rem" class="flex-grow-1">
+            <RadzenText Text="Host" TextStyle="TextStyle.Body2" />
+            <RadzenTextBox @bind-Value="destinationToEdit.Host" Placeholder="localhost" />
+        </RadzenStack>
+        <RadzenStack Orientation="Orientation.Vertical" Gap="0.5rem" Style="width: 120px;">
+            <RadzenText Text="Puerto" TextStyle="TextStyle.Body2" />
+            <RadzenNumeric @bind-Value="destinationToEdit.Port" />
+        </RadzenStack>
+    </RadzenStack>
+    <RadzenStack Orientation="Orientation.Horizontal" Gap="1rem" class="mb-2">
+        <RadzenStack Orientation="Orientation.Vertical" Gap="0.5rem" class="flex-grow-1">
+            <RadzenText Text="Usuario" TextStyle="TextStyle.Body2" />
+            <RadzenTextBox @bind-Value="destinationToEdit.UserName" />
+        </RadzenStack>
+        <RadzenStack Orientation="Orientation.Vertical" Gap="0.5rem" class="flex-grow-1">
+            <RadzenText Text="Contraseña" TextStyle="TextStyle.Body2" />
+            <RadzenTextBox @bind-Value="destinationToEdit.Password" type="password" />
+        </RadzenStack>
+    </RadzenStack>
+    <RadzenStack Orientation="Orientation.Vertical" Gap="0.5rem" class="mb-2">
+        <RadzenText Text="Bucket" TextStyle="TextStyle.Body2" />
+        <RadzenTextBox @bind-Value="destinationToEdit.Bucket" Placeholder="Nombre del bucket (opcional)" />
+    </RadzenStack>
+    <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" Gap="1.5rem" class="mb-2">
+        <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" Gap="0.5rem">
+            <RadzenText Text="Activo" TextStyle="TextStyle.Body2" />
+            <RadzenSwitch @bind-Value="destinationToEdit.IsActive" />
+        </RadzenStack>
+    </RadzenStack>
+    <RadzenStack Orientation="Orientation.Horizontal" JustifyContent="JustifyContent.End" Gap="1rem" class="mt-3">
+        <RadzenButton ButtonType="ButtonType.Button"
+                      Text="Cancelar"
+                      ButtonStyle="ButtonStyle.Light"
+                      Click="@Close" />
+        <RadzenButton ButtonType="ButtonType.Submit"
+                      Text="Guardar"
+                      ButtonStyle="ButtonStyle.Primary"
+                      Icon="save"
+                      IsBusy="@isSaving" />
+    </RadzenStack>
+</EditForm>

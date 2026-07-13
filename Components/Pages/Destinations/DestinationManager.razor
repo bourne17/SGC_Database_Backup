@@ -1,5 +1,32 @@
-﻿<h3>DestinationManager</h3>
+﻿@page "/destinations/list"
+@using SGC_Database_Backup.Components.Extensions
+<LoadingOverlay IsLoading="@isLoading" />
+<ComponentHeader Title="Gestion de Destinos" SubTitle="Gestiona la lista de destinos" OnRefresh="LoadDestinations" OnAdd="AddDestination" />
+<RadzenDataGrid Data="destinations">
+    <Columns>
+        <RadzenDataGridColumn Property="Description" Title="Nombre" Width="160px" />
+        <RadzenDataGridColumn Property="DestinationTypeDescription" Title="Tipo" Width="160px" />
+        <RadzenDataGridColumn Property="Path" Title="Ruta" Width="160px" />
+        <RadzenDataGridColumn Context="context" Title="Estatus" Width="160px">
+            <Template>
+                @if (context.IsActive)
+                {
+                    <RadzenChip Text="Activo" ChipStyle="BadgeStyle.Success" />
+                }
+                else
 
-@code {
+                {
+                    <RadzenChip Text="Suspendido" ChipStyle="BadgeStyle.Danger" />
 
-}
+                }
+            </Template>
+        </RadzenDataGridColumn>
+        <RadzenDataGridColumn Context="context" Title="Acciones" Width="160px">
+            <Template>
+                <RadzenButton Click="@(() => EditDestination(context.Id))" Icon="edit" ButtonStyle="ButtonStyle.Warning" Size="ButtonSize.Small" title="Editar" />
+                <RadzenButton Icon="delete_forever" ButtonStyle="ButtonStyle.Danger" Click="@(() => DeleteDestination(context.Id))" Size="ButtonSize.Small" title="Eliminar conexion" />
+            </Template>
+        </RadzenDataGridColumn>
+
+    </Columns>
+</RadzenDataGrid>

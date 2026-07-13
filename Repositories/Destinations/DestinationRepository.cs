@@ -5,10 +5,20 @@ using SGC_Database_Backup.Repositories.Generic;
 
 namespace SGC_Database_Backup.Repositories.Destinations
 {
-    public class DestinationRepository : GenericRepository<Destination>, IDestinationRepository
+    public class DestinationRepository(IDbContextFactory<ApplicationDbContext> context) : GenericRepository<Destination>(context), IDestinationRepository
     {
-        public DestinationRepository(IDbContextFactory<ApplicationDbContext> context) : base(context)
+        public override async Task<IEnumerable<Destination>> GetAllAsync()
         {
+            var dbcontext = await context.CreateDbContextAsync();
+
+            return await dbcontext.Destination.Select(x => new Destination
+            {
+                Id = x.Id,
+                Description = x.Description,
+                Path=x.Path,
+                DestinationTypeDescription=x.DestinationType.Description,
+                IsActive=x.IsActive
+            }).ToListAsync();
         }
     }
 }

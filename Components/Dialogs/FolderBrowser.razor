@@ -1,0 +1,41 @@
+@using SGC_Database_Backup.Components.Extensions
+<LoadingOverlay IsLoading="@isLoading" />
+
+<RadzenStack Orientation="Orientation.Vertical" Gap="0.5rem">
+    <RadzenStack Orientation="Orientation.Horizontal" Gap="0.5rem" AlignItems="AlignItems.Center">
+        <RadzenTextBox @bind-Value="currentPath" Placeholder="Ruta..." Style="flex-grow: 1;" />
+        <RadzenButton Text="Ir" ButtonStyle="ButtonStyle.Primary" Click="@NavigateToPath" />
+    </RadzenStack>
+
+    <RadzenText Text="Directorios:" TextStyle="TextStyle.Body2" />
+
+    <div class="folder-list" style="max-height: 300px; overflow-y: auto; border: 1px solid #e0e0e0; border-radius: 4px; padding: 4px;">
+        @if (directories.Count == 0)
+        {
+            <div class="p-3 text-center text-muted">
+                <RadzenText Text="No hay directorios para mostrar" TextStyle="TextStyle.Body2" />
+            </div>
+        }
+        @foreach (var dir in directories)
+        {
+            <div class="folder-item d-flex align-items-center justify-content-between px-2 py-1" style="border-bottom: 1px solid #f0f0f0;">
+                <div class="d-flex align-items-center">
+                    <span class="me-2">📁</span>
+                    <span>@dir</span>
+                </div>
+                <div class="d-flex gap-1">
+                    <RadzenButton Text="Abrir" ButtonStyle="ButtonStyle.Info" Size="ButtonSize.Small" Click="@(() => NavigateToSubdirectory(dir))" />
+                    <RadzenButton Text="Seleccionar" ButtonStyle="ButtonStyle.Success" Size="ButtonSize.Small" Click="@(() => SelectDirectory(dir))" />
+                </div>
+            </div>
+        }
+    </div>
+
+    <RadzenStack Orientation="Orientation.Horizontal" JustifyContent="JustifyContent.SpaceBetween" AlignItems="AlignItems.Center" class="mt-2">
+        <RadzenButton Text="Subir carpeta" ButtonStyle="ButtonStyle.Secondary" Icon="arrow_upward" Click="@GoUp" />
+        <RadzenStack Orientation="Orientation.Horizontal" Gap="0.5rem">
+            <RadzenButton Text="Cancelar" ButtonStyle="ButtonStyle.Light" Click="@Close" />
+            <RadzenButton Text="Seleccionar esta ruta" ButtonStyle="ButtonStyle.Primary" Icon="check" Click="@SelectCurrentPath" />
+        </RadzenStack>
+    </RadzenStack>
+</RadzenStack>

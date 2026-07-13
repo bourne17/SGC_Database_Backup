@@ -1,6 +1,9 @@
-﻿namespace SGC_Database_Backup.Repositories.BackupJobs
+﻿using SGC_Database_Backup.Entities;
+using SGC_Database_Backup.Repositories.Generic;
+
+namespace SGC_Database_Backup.Repositories.BackupJobs
 {
-    public interface IBackupJobRepository
+    public interface IBackupJobRepository:IGenericRepository<BackupsJobs>
     {
     }
 }
